@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   resources :bands do
-    resources :album, only: [:new]
+    resources :albums, only: [:new]
 
   end
-  resources :albums, only: [:create, :update, :edit, :destroy] do
+  resources :albums, only: [:create, :show, :update, :edit, :destroy] do
     resources :tracks, only: [:new]
   end
   resources :tracks, only: [:create, :edit, :update, :show, :destroy]
-  
+
 
 
 end

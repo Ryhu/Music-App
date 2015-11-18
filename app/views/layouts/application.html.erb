@@ -1,5 +1,6 @@
-Logged in as: <%= current_user.email %>
+
 <% if logged_in? %>
+  Logged in as: <%= current_user.email %>
   <%= button_to "Sign Out", session_url, method: :delete %>
 <% end %>
 <!DOCTYPE html>
