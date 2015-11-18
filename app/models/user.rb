@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   after_initialize do
     ensure_session_token
   end
-
+  has_many :notes
   validates :email, :password_digest, :session_token, presence: true
   validates :session_token, :email, uniqueness: true
 
