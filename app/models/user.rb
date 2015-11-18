@@ -1,12 +1,10 @@
 class User < ActiveRecord::Base
-  after_initialize :ensure_session_token
+  after_initialize do
+    ensure_session_token
+  end
 
   validates :email, :password_digest, :session_token, presence: true
-  validates :session_token, uniqueness: true
-
-  def self.generate_session_token
-    SecureRandom::urlsafe_base64
-  end
+  validates :session_token, :email, uniqueness: true
 
   def reset_session_token!
     self.session_token = SecureRandom::urlsafe_base64
@@ -15,7 +13,9 @@ class User < ActiveRecord::Base
   end
 
   def ensure_session_token
+
     self.session_token ||= SecureRandom::urlsafe_base64
+
   end
 
   def password=(password)
