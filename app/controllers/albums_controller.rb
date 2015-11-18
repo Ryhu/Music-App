@@ -12,13 +12,21 @@ class AlbumsController < ApplicationController
   def edit
     @album = Album.find(params[:id])
     render :edit
+
   end
 
   def destroy
     @album = Album.find(params[:id])
     @album.destroy
+  end
 
-
+  def update
+    @album = Album.find(params[:id])
+    if @album.update_attributes(album_params)
+      redirect_to album_url(@album)
+    else
+      render :edit
+    end
   end
 
   def create

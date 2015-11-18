@@ -2,8 +2,10 @@
 
 <% @band.albums.each do |album| %>
   <%= link_to album.title, album_url(album) %>
+  <br>
 <% end %>
 
+<br>
 <br>
 
 <%= link_to "New Album", new_band_album_url(@band) %>
