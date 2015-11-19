@@ -1,10 +1,11 @@
 <% track.notes.each do |note| %>
-  Authored by: <%= current_user.email %>
+  Authored by: <%= note.user.email %>
   <br>
   <%= note.body %>
   <br>
+  <% if note.user.email == current_user.email %>
+    <%= button_to "Destroy note", track_note_url(track, note), method: :delete %>
+  <% end %>
   <br>
-
-
 
 <% end %>
