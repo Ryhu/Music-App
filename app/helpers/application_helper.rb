@@ -1,10 +1,10 @@
 module ApplicationHelper
   def ugly_lyrics(lyrics)
     result = ""
-    list = lyrics.split("\r\n")
-    list.each do |line|
-      result += "&#9835;" + html_escape(line)
+    lyrics.lines.each do |line|
+      result << "&#9835; #{html_escape(line)}"
     end
-    result.html_safe
+
+    "<pre>#{result}</pre>".html_safe
   end
 end

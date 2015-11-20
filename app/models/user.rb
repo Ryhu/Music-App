@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   after_initialize do
     ensure_session_token
+    generate_activation_token
   end
   has_many :notes
-  validates :email, :password_digest, :session_token, presence: true
+  validates :email, :password_digest, :session_token, :activation_token, presence: true
   validates :session_token, :email, uniqueness: true
 
   def reset_session_token!
@@ -13,10 +14,17 @@ class User < ActiveRecord::Base
   end
 
   def ensure_session_token
-
     self.session_token ||= SecureRandom::urlsafe_base64
-
   end
+
+  def generate_activation_token
+    self.activation_token ||= SecureRandom::urlsafe_base64
+  end
+
+  def activated?
+    self.activated
+  end
+
 
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
